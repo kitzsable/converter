@@ -72,8 +72,8 @@ public class ConverterTest {
      */
     @ParameterizedTest
     @DisplayName("Проверка дочерних элементов алгоритмом для любой коллекции")
-    @MethodSource("provideDataForSecondLevelTest")
-    public void secondLevelDefinitionTest(List<Integer> nodes, Collection<Integer> expectedChildrenIds) {
+    @MethodSource("provideDataForChildrenDefinitionTest")
+    public void childrenDefinitionTest(List<Integer> nodes, Collection<Integer> expectedChildrenIds) {
         Collection<TreeDTO> result = Converter.convert(treesList);
 
         Collection<Integer> childrenIds = getChildrenIdsByPath(result, nodes);
@@ -90,8 +90,8 @@ public class ConverterTest {
      */
     @ParameterizedTest
     @DisplayName("Проверка дочерних элементов алгоритмом для упорядоченной коллекции")
-    @MethodSource("provideDataForSecondLevelTest")
-    public void secondLevelDefinitionBySortedConverterTest(List<Integer> nodes, Collection<Integer> expectedChildrenIds) {
+    @MethodSource("provideDataForChildrenDefinitionTest")
+    public void childrenDefinitionBySortedConverterTest(List<Integer> nodes, Collection<Integer> expectedChildrenIds) {
         Collection<TreeDTO> result = Converter.convertOrderedNodes(orderedTreesList);
 
         Collection<Integer> childrenIds = getChildrenIdsByPath(result, nodes);
@@ -111,7 +111,7 @@ public class ConverterTest {
         return children.stream().map(TreeDTO::getId).toList();
     }
 
-    private static Stream<Arguments> provideDataForSecondLevelTest() {
+    private static Stream<Arguments> provideDataForChildrenDefinitionTest() {
         return Stream.of(
                 Arguments.of(List.of(3), Arrays.asList(2, 4)),
                 Arguments.of(Arrays.asList(3, 2), List.of()),
